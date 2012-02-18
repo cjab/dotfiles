@@ -8,4 +8,4 @@ altscreen on
 defc1 off
 defbce on
 vbell off
-term xterm
+term screen-256color
