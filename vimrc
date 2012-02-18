@@ -1,10 +1,12 @@
 filetype off
 
 let g:syntastic_enable_signs=1
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 call pathogen#infect()
+
 
 color twilight
 
@@ -30,7 +32,7 @@ let mapleader = ','
 map <C-n> :tabn<CR>
 map <C-p> :tabp<CR>
 map <C-t> :tabnew<CR>
-map <leader>n :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle \| :silent NERDTreeMirror<CR>
 map <leader>v :tabedit $MYVIMRC<CR>
 map <leader>s :setlocal spell spelllang=en_us<CR>
 map <leader>b :Gblame
