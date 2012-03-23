@@ -7,7 +7,6 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 call pathogen#infect()
 
-
 color twilight
 
 syn on filetype plugin on
@@ -20,6 +19,7 @@ set tabstop=2
 set shiftwidth=2
 set nowrap
 set visualbell t_vb=
+set laststatus=2
 
 set list
 set listchars=tab:▸\ ,trail:▪
