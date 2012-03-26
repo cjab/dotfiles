@@ -7,6 +7,13 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
+OS=${OSTYPE//[0-9.]/}
+if [ "${OS}" = "darwin" ] ; then
+  VIM=/Applications/MacVim.app/Contents/MacOS/Vim
+  alias vim=$VIM
+  export GIT_EDITOR=$VIM
+fi
+
 # EC2
 export EC2_PRIVATE_KEY=$HOME/.ec2/pk.pem
 export EC2_CERT=$HOME/.ec2/cert.pem
