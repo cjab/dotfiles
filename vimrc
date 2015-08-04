@@ -8,12 +8,9 @@ Bundle "gmarik/vundle"
 
 Bundle "wincent/Command-T"
 Bundle "vim-scripts/CSApprox"
-Bundle "vim-scripts/hexman.vim"
 Bundle "othree/html5.vim"
-Bundle "JuliaLang/julia-vim"
 Bundle "juvenn/mustache.vim"
 Bundle "scrooloose/nerdtree"
-Bundle "thiderman/nginx-vim-syntax"
 Bundle "shawncplus/php.vim"
 Bundle "scrooloose/syntastic"
 Bundle "kchmck/vim-coffee-script"
@@ -27,12 +24,30 @@ Bundle "tpope/vim-markdown"
 Bundle "b4winckler/vim-objc"
 Bundle "tpope/vim-rails"
 Bundle "jpalardy/vim-slime"
+Bundle "alunny/pegjs-vim"
+Bundle "wting/rust.vim"
+Bundle "avakhov/vim-yaml"
+Bundle "cespare/vim-toml"
+Bundle "jneen/ragel.vim"
+
+
+" Colors
 Bundle "dterei/Twilight"
+Bundle "shinzui/vim-idleFingers"
+Bundle "altercation/vim-colors-solarized"
 
 
 let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_c_compiler_options = ' -ms-extensions'
+let g:syntastic_javascript_checkers = ['jsxhint']
+
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 let g:slime_target="tmux"
+
+let g:CommandTMaxFiles=100000
+set wildignore+=data/game_data/**,assets/**,*/node_modules/**,*/bower_components/**,dist/**,*/images/**
 
 let mapleader = ','
 
@@ -49,14 +64,15 @@ set shiftwidth=2
 set nowrap
 set visualbell t_vb=
 set laststatus=2
+set ruler
 
 set list
 set listchars=tab:▸\ ,trail:▪
 highlight NonText guifg=#4a4a59
 highlight NonText guibg=#1a1a1a
 highlight SpecialKey guifg=#2c2c35
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+highlight ColorColumn guibg=#262626
+execute "set colorcolumn=" . join(range(81,335), ',')
 
 map <C-n> :tabn<CR>
 map <C-p> :tabp<CR>
@@ -96,3 +112,16 @@ if has("unix")
     set clipboard=unnamed
   endif
 endif
+
+
+
+func! WordProcessorMode()
+    setlocal formatoptions=t1
+    setlocal textwidth=80
+    map j gj
+    map k gk
+    setlocal smartindent
+    setlocal spell spelllang=en_us
+    setlocal noexpandtab
+endfu
+com! WP call WordProcessorMode()
