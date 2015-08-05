@@ -11,16 +11,12 @@ export TERM=xterm-256color
 
 OS=${OSTYPE//[0-9.]/}
 if [ "${OS}" = "darwin" ] ; then
-  VIM=/Applications/MacVim.app/Contents/MacOS/Vim
-  alias vim=$VIM
-  export GIT_EDITOR=$VIM
-  PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+fi
+if [ "${OS}" = "linux-gnu" ] ; then
 fi
 
-if [ "${OS}" = "linux-gnu" ] ; then
-  export PATH="/opt/vagrant/bin:$PATH"
-  source $HOME/.profile
-fi
+export EDITOR=`which vim`
+export GIT_EDITOR=$EDITOR
 
 # EC2
 #export EC2_HOME=~/.ec2
@@ -35,7 +31,7 @@ fi
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # npm
 export PATH="/usr/local/share/npm/bin:$PATH"
