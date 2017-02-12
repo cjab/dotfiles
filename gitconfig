@@ -1,13 +1,17 @@
 [user]
-	name = Chad Jablonski
-	email = chad@dinocore.net
+  name = Chad Jablonski
+  email = chad@dinocore.net
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [push]
-	default = matching
+  default = matching
 [github]
-	user = cjab
+  user = cjab
 [core]
-	excludesfile = /home/cjab/.gitignore
+  excludesfile = ~/.gitignore
+[interactive]
+  diffFilter = diff-highlight
+[diff]
+  compactionHeuristic = true

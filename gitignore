@@ -1,0 +1,7 @@
+.*.swp
+.*.swo
+.swp
+.swo
+dump.rdb
+Procfile.cjab
+.DS_Store

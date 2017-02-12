@@ -53,6 +53,7 @@ Host franklin
   User root
   IdentityFile ~/.ssh/digital_ocean.pem
 
+
 Host minecraft
   Hostname 162.243.116.53
   User root

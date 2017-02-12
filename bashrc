@@ -117,3 +117,8 @@ if [[ -n $PS1 ]] ; then
 fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 #EOF .bashrc
+
+# added by travis gem
+[ -f /Users/cjab/.travis/travis.sh ] && source /Users/cjab/.travis/travis.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

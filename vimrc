@@ -1,57 +1,38 @@
-set nocompatible
-filetype off
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+Plug 'vim-polyglot'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'vim-scripts/CSApprox'
+Plug 'neomake/neomake'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
+Plug 'ivalkeen/vim-simpledb', { 'for': 'sql' }
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jgdavey/tslime.vim'
+Plug 'dterei/Twilight'
 
-Bundle "gmarik/vundle"
+call plug#end()
 
-Bundle "wincent/Command-T"
-Bundle "vim-scripts/CSApprox"
-Bundle "othree/html5.vim"
-Bundle "juvenn/mustache.vim"
-Bundle "scrooloose/nerdtree"
-Bundle "shawncplus/php.vim"
-Bundle "scrooloose/syntastic"
-Bundle "kchmck/vim-coffee-script"
-Bundle "hail2u/vim-css3-syntax"
-Bundle "tpope/vim-cucumber"
-Bundle "tpope/vim-fugitive"
-Bundle "tpope/vim-haml"
-Bundle "pangloss/vim-javascript"
-Bundle "maksimr/vim-jsbeautify"
-Bundle "tpope/vim-markdown"
-Bundle "b4winckler/vim-objc"
-Bundle "tpope/vim-rails"
-Bundle "jpalardy/vim-slime"
-Bundle "alunny/pegjs-vim"
-Bundle "wting/rust.vim"
-Bundle "avakhov/vim-yaml"
-Bundle "cespare/vim-toml"
-Bundle "jneen/ragel.vim"
-
-
-" Colors
-Bundle "dterei/Twilight"
-Bundle "shinzui/vim-idleFingers"
-Bundle "altercation/vim-colors-solarized"
-
-
-let g:syntastic_enable_signs=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_c_compiler_options = ' -ms-extensions'
-let g:syntastic_javascript_checkers = ['jsxhint']
-
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-let g:slime_target="tmux"
-
-let g:CommandTMaxFiles=100000
-set wildignore+=data/game_data/**,assets/**,*/node_modules/**,*/bower_components/**,dist/**,*/images/**
-
-let mapleader = ','
 
 color twilight
+
+let mapleader = ','
+nmap c ,
+
+let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
+let g:neomake_ocaml_enabled_checkers = ['merlin']
+let g:neomake_error_sign = {
+  \ 'text': '❌',
+  \ }
+let g:neomake_warning_sign = {
+  \ 'text': '💥',
+  \ }
 
 syn on filetype plugin on
 filetype plugin indent on
@@ -72,7 +53,12 @@ highlight NonText guifg=#4a4a59
 highlight NonText guibg=#1a1a1a
 highlight SpecialKey guifg=#2c2c35
 highlight ColorColumn guibg=#262626
-execute "set colorcolumn=" . join(range(81,335), ',')
+set clipboard=unnamed
+
+hi LineNr ctermbg=black ctermfg=blue guibg=gray20 guifg=DarkSeaGreen4
+hi CursorLineNr ctermfg=Yellow guifg=SeaGreen1
+set number
+set nocursorline
 
 map <C-n> :tabn<CR>
 map <C-p> :tabp<CR>
@@ -81,47 +67,12 @@ map <leader>n :NERDTreeToggle \| :silent NERDTreeMirror<CR>
 map <leader>v :tabedit $MYVIMRC<CR>
 map <leader>s :setlocal spell spelllang=en_us<CR>
 map <leader>b :Gblame
-map <leader>y :CommandTFlush<CR>
+map <leader>t :FZF<CR>
 map <leader>w :%s/\s\+$//e<CR>
+map <leader>a :AT<CR>
+map <Leader>r :call RunNearestSpec()<CR>
+map <Leader>e :call RunCurrentSpecFile()<CR>
+map <Leader>g :MerlinTypeOf<CR>
 set pastetoggle=<leader>p
 
-autocmd FileType python
-  \ setlocal expandtab |
-  \ setlocal shiftwidth=4 |
-  \ setlocal tabstop=4
-
-au! BufNewFile,BufRead *.m setf objc
-
-if has("unix")
-  let s:uname = system("uname")
-
-  if s:uname == "Darwin"
-    let g:clang_use_library=1
-    let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-    let g:clang_periodic_quickfix=1
-    let g:clang_debug=1
-
-    function! XCodeBuild()
-      let l:command = 'xcodebuild -sdk iphonesimulator5.0'
-      let l:out     = system(l:command)
-      cexpr l:out
-    endfunction
-  endif
-
-  if s:uname == "Linux"
-    set clipboard=unnamed
-  endif
-endif
-
-
-
-func! WordProcessorMode()
-    setlocal formatoptions=t1
-    setlocal textwidth=80
-    map j gj
-    map k gk
-    setlocal smartindent
-    setlocal spell spelllang=en_us
-    setlocal noexpandtab
-endfu
-com! WP call WordProcessorMode()
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
