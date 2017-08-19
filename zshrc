@@ -61,7 +61,14 @@ alias wemux='TERM=xterm-256color wemux'
 # Cargo
 export PATH="$HOME/.cargo/bin:$PATH";
 
-# added by travis gem
-[ -f /Users/cjab/.travis/travis.sh ] && source /Users/cjab/.travis/travis.sh
-
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# asdf
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+# iex
+alias iex="rlwrap -a -A iex"
+alias erl="rlwrap -a -A erl"
+export PATH="$HOME/.asdf/installs/elixir/1.5.0/.mix/escripts:$PATH";
