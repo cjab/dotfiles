@@ -1,6 +1,7 @@
 [user]
   name = Chad Jablonski
   email = chad@dinocore.net
+  signingkey = 1D0D827E319B9A94E8797E2C4819EFFEB371573D
 [color]
   diff = auto
   status = auto
@@ -11,7 +12,10 @@
   user = cjab
 [core]
   excludesfile = ~/.gitignore
+  editor = vim
 [interactive]
   diffFilter = diff-highlight
 [diff]
   compactionHeuristic = true
+[pager]
+  branch = false

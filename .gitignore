@@ -1,6 +1,0 @@
-ssh/*
-!ssh/config
-vim/.netrwhist
-vim/bundle/**
-*.swp
-*.pem

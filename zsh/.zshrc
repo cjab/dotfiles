@@ -1,6 +1,10 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="norm"
 
+VIM=`which mvim`
+alias vim="$VIM -v"
+alias vi="$VIM -v"
+
 plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
@@ -10,15 +14,8 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 # git
-export EDITOR=`which vim`
+export EDITOR="$VIM -v"
 export GIT_EDITOR=$EDITOR
-
-# rbenv
-if which rbenv > /dev/null; then
-  export RUBY_CONFIGURE_OPTS="--with-readline-dir=/usr/local/opt/readline"
-  export PATH="$HOME/.rbenv/bin:$PATH";
-  eval "$(rbenv init - zsh)";
-fi
 
 # rake
 alias rake='noglob rake'
@@ -69,6 +66,20 @@ export PATH="$HOME/.cargo/bin:$PATH";
 . $HOME/.asdf/completions/asdf.bash
 
 # iex
-alias iex="rlwrap -a -A iex"
-alias erl="rlwrap -a -A erl"
 export PATH="$HOME/.asdf/installs/elixir/1.5.0/.mix/escripts:$PATH";
+
+export FZF_TMUX=1
+
+# Erlang
+export ERL_AFLAGS="-kernel shell_history enabled"
+
+# gpg
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
+# MacTeX
+export PATH="/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin:$PATH"
+
+# Emscripten
+# export PATH="/Users/cjab/emsdk-portable:/Users/cjab/emsdk-portable/clang/fastcomp/build_incoming_64/bin:/Users/cjab/emsdk-portable/node/8.9.1_64bit/bin:/Users/cjab/emsdk-portable/emscripten/incoming:$PATH"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
